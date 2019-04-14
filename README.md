@@ -3,23 +3,33 @@
 <a href="https://heroku.com/deploy" target="_blank"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
 
 from flask import Flask, render_template
+
 app = Flask(__name__,static_url_path="/static")
+
 from flask import jsonify
+
 import os.path
+
 import sys
+
 import json
+
 import pandas as pd
+
 from flask import request
+
 import requests
 
 
 @app.route("/")
+
 def template_test():
     print("hello")
     return render_template('initial.html')
 
 
 @app.route("/rest/api/")
+
 def api_call():
     q = request.args.get('q')
     print(q)
