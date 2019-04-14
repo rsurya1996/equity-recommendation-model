@@ -2,42 +2,33 @@
 
 <a href="https://heroku.com/deploy" target="_blank"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
 
-from flask import Flask, render_template
+	from flask import Flask, render_template
+	app = Flask(__name__,static_url_path="/static")
+	from flask import jsonify
+	import os.path
+	import sys
+	import json
+	import pandas as pd
+	from flask import request
+	import requests
 
-app = Flask(__name__,static_url_path="/static")
+	@app.route("/")
 
-from flask import jsonify
-
-import os.path
-
-import sys
-
-import json
-
-import pandas as pd
-
-from flask import request
-
-import requests
-
-
-@app.route("/")
-
-def template_test():
-    print("hello")
-    return render_template('initial.html')
+	def template_test():
+    		print("hello")
+    		return render_template('initial.html')
 
 
 @app.route("/rest/api/")
 
-def api_call():
+	def api_call():
     q = request.args.get('q')
     print(q)
     value = fun(q)
     #value = json.loads(value)
     return (value)
 
-def fun(q):
+	def fun(q):
     choice = q
     print(choice)
     #choice = "ALBDULA000048805"
@@ -47,7 +38,19 @@ def fun(q):
     import csv
     #os.chdir("E:\\PoCs\\SE2")  ## have some library
     
-    #Read OIPA
+   
+    
+    def fun(q):
+    choice = q
+    print(choice)
+    #choice = "ALBDULA000048805"
+    ##Packages
+    import pandas as pd
+    import os
+    import csv
+    #os.chdir("E:\\PoCs\\SE2")  ## have some library
+    
+     #Read OIPA
     OIPA_data = pd.read_csv("OIPA.csv")
     
     #Filter the required data
@@ -145,6 +148,6 @@ def fun(q):
     val = {"BeforeCashVal":Before_Fund_Switch_Equity_Cash_Value,"BeforeOutstanding":Before_Fund_Switch_Equity_Outstanding_units,"BeforePercentSplit":Before_Fund_Switch_Equity_Percent_Split,"BeforeMMCashVal":Before_Fund_Switch_MM_Cash_Value,"BeforeMMOutstanding":Before_Fund_Switch_MM_Outstanding_units,"BeforeMMPercentSplit":Before_Fund_Switch_MM_Percent_Split,"RecommendedEquitySplit":Recommended_Equity_Split,"RecommendedMM":Recommended_MM_Split,"AfterCashValue":After_Fund_Switch_Equity_Cash_Value,"AfterEquityUnits":After_Fund_Switch_Equity_Units,"AfterMMCashValue":After_Fund_Switch_MM_Cash_Value,"AfterMMEquityUnits":After_Fund_Switch_MM_Units}
     return (json.dumps(val))
 	
-if __name__ == '__main__':
+	if __name__ == '__main__':
     #app.run(ssl_context='adhoc')
     app.run(host='0.0.0.0', port=7000)
